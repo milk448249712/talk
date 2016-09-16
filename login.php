@@ -13,26 +13,28 @@
   <tr>
     <td height="30" align="center" bgcolor="#F5E6C1">
 	<?php 
-	if($_GET["tj"] == "out"){
+	if($_GET["logout"] == "out"){
 	$_COOKIE["nick"] = "";
 	setcookie ("nick", "", time() - 3600);
 	// header("refresh:1; URL='login.php'");
 	}
 	// echo '_POST:'.$_POST["submit"];
-	if($_POST["nick"]){
-		$_COOKIE["nick"] = $_POST["nick"];
-		setcookie("nick",$_POST["nick"], time() + 3600); //用cookie记录用户昵称,也可以用SESSION
-		// setcookie("nick",$_POST["nick"], time() + 3600);
-		// echo 'setcookie:'.$_POST["nick"];
-		if (!isset($_COOKIE["nick"]))
-		  echo "Welcome guest!<br />";
-		// header("refresh:1; URL='login.php'");
+	if($_POST["nick"] or $_POST["nick"]==''){
+                if ($_POST["nick"]=='') {
+                        echo "Welcome guest!<br />";
+                }
+                else {
+		        $_COOKIE["nick"] = $_POST["nick"];
+		        setcookie("nick",$_POST["nick"], time() + 3600); //用cookie记录用户昵称,也可以用SESSION
+		        if (!isset($_COOKIE["nick"]))
+		                echo "Welcome guest!<br />";
+                }
 	}
 	?>
 	
 	<?php 
 		if($_COOKIE["nick"]){
-			echo "欢迎您&nbsp;".$_COOKIE["nick"]."&nbsp;<a href=?tj=out>退出房间</a>";
+			echo "欢迎您&nbsp;".$_COOKIE["nick"]."&nbsp;<a href=?logout=out>退出房间</a>";
 		} else {
 			echo "请输入您的昵称";}
 	?></td>
