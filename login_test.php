@@ -25,11 +25,15 @@
         if ($row['name']==$name and $row['pwd']==$pwd) {
             $b_isin = true;
         }
-        else
+        else {
             $b_isin = false;
+            break;
+        }
     }
     if ($b_isin) {
 		echo "authorization valid!<br>";
+        session_start();
+        $_SESSION['user'] = $name;
 	    header("refresh:3; URL='chartroom.php'");
     }
     else {
