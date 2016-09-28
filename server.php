@@ -12,7 +12,7 @@
         // sem_acquire($semid);    // acquire the semaphore
         $size = shmop_size($shmid);
         $memstr = shmop_read($shmid, 0, $size);
-        echo $memstr;
+        echo "$memstr\n";
         // friends list function
         // do sth.
     }
