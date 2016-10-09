@@ -34,7 +34,7 @@
 		echo "authorization valid!<br>";
         session_start();
         $_SESSION['user'] = $name;
-	    header("refresh:3; URL='chartroom.php'");
+	    header("refresh:0; URL='chartroom.php'");
     }
     else {
         echo "authorization invalid!<br>";
