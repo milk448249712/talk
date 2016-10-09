@@ -1,5 +1,8 @@
 <?php
-    echo "It is this page!<br>";
+    session_start();
+    echo "Talk page!<br>";
     // load friend interface
-    require_once('friends.php');
+    // echo $_SESSION['user'];
+    require_once("friends.php");
+    
 ?>
