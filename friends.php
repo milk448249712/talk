@@ -21,12 +21,15 @@
         <td>
         <?php
         echo $child->attributes()." ";
-        echo "<a href=\"\">";
+        // echo "<a href=?user=test>";
+        $talk_to = "";
         foreach($child->children() as $childv2)
         {
-            echo "$childv2";
+            $talk_to = $childv2;
         }
-        echo "</a>"
+        echo "<a href=?str_to=$talk_to>";
+        echo " ".$talk_to;
+        echo "</a>";
         ?>
         </td>
         </tr>
