@@ -3,7 +3,7 @@
 	$pwd = $_POST["pwd"];
 	// echo "name:".$name."<br>";   
 	// echo "pwd:".$pwd."<br>";
-	$link_ID=mysql_connect("localhost","miracle");// 链接Mysql服务器
+	$link_ID=mysql_connect("localhost","unnkai","qwwqwwqww");// 链接Mysql服务器
 	if ($link_ID) {
 		echo 'connected<br>';
 	}

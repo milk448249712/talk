@@ -4,9 +4,12 @@
 ?>
 <html>
 <body>
+<p id="clock"><p>
 <?php
     if($_GET["str_to"]!="") {
         echo $_SESSION['user']." talk to ".$_GET["str_to"];
+        date_default_timezone_set("Asia/Shanghai");
+        echo date("Y-m-d H:i:s");
     }
     else {
         echo 'nothing...';
@@ -32,3 +35,16 @@
         echo 'do some read thing.';
     }
 ?>
+<script language=javascript>
+    // var int=self.setInterval("clock()",50)
+    clock()
+    function clock()
+    {
+        var t=new Date()
+        document.getElementById("clock").innerHTML=t
+        setTimeout("clock()",3000)
+        // document.getElementById('txt').value=c
+        //window.location.href="http://www.baidu.com"; 
+        
+    }
+</script>
