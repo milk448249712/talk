@@ -10,6 +10,7 @@
         echo $_SESSION['user']." talk to ".$_GET["str_to"];
         date_default_timezone_set("Asia/Shanghai");
         echo date("Y-m-d H:i:s");
+
     }
     else {
         echo 'nothing...';
@@ -40,11 +41,29 @@
     clock()
     function clock()
     {
+        // document.write("<p>My First JavaScript</p>");
         var t=new Date()
-        document.getElementById("clock").innerHTML=t
-        setTimeout("clock()",3000)
-        // document.getElementById('txt').value=c
-        //window.location.href="http://www.baidu.com"; 
-        
+        //document.getElementById("clock").innerHTML=t
+        setTimeout("clock()",3000)     
+        //document.getElementById('txt').value=c
+        //window.location.href="update_talk.php?from=<?php$_SESSION['user']?>&to=<?php$_SESSION['to_who']?>>";
+        var xmlhttp;
+        if (window.XMLHttpRequest)
+        {// code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp=new XMLHttpRequest();
+        }
+        else
+        {// code for IE6, IE5
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange=function()
+        {
+            if (xmlhttp.readyState==4 && xmlhttp.status==200)
+            {
+                document.getElementById("clock").innerHTML=t+xmlhttp.responseText;
+            }
+        }
+        xmlhttp.open("GET","update_talk.php",true);
+        xmlhttp.send();i
     }
 </script>
