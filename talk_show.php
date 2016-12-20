@@ -4,12 +4,13 @@
 ?>
 <html>
 <body>
-<p id="clock"><p>
+<!--<p id="clock"><p>-->
 <?php
     if($_GET["str_to"]!="") {
         echo $_SESSION['user']." talk to ".$_GET["str_to"];
+        $_SESSION['to_who'] = $_GET["str_to"];
         date_default_timezone_set("Asia/Shanghai");
-        echo date("Y-m-d H:i:s");
+        // echo date("Y-m-d H:i:s");
 
     }
     else {
@@ -21,10 +22,11 @@
         write_to($_POST['input']);
     }
 ?>
-    <form method="post">
-    <input type="text" name="input"></input>
-    <input type="submit" name="submit" value="发送"></input>
-    </form>
+<p id="clock"><p>
+    
+    <input type="text" name="input" id="input"></input>
+    <input type="submit" name="submit" value="发送" onclick="send_back()"></input>
+<p id="tips"><p> 
 </body>
 </html>
 <?php
@@ -60,10 +62,36 @@
         {
             if (xmlhttp.readyState==4 && xmlhttp.status==200)
             {
-                document.getElementById("clock").innerHTML=t+xmlhttp.responseText;
+                document.getElementById("clock").innerHTML=xmlhttp.responseText;
             }
         }
         xmlhttp.open("GET","update_talk.php",true);
-        xmlhttp.send();i
+        xmlhttp.send();
+        // document.getElementById("tips").innerHTML="";
+    }
+    function send_back() {
+        // document.write("send");
+        var xmlhttp;
+        if (window.XMLHttpRequest)
+        {// code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp=new XMLHttpRequest();
+        }
+        else
+        {// code for IE6, IE5
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange=function()
+        {
+            if (xmlhttp.readyState==4 && xmlhttp.status==200)
+            {
+                document.getElementById("clock").innerHTML=xmlhttp.responseText;
+            }
+        }
+        var word = document.getElementById("input").value;
+        // document.getElementById("tips").innerHTML=word;
+        xmlhttp.open("GET","update_talk.php?w="+word,true);
+        xmlhttp.send();
+        clock();
+        // document.getElementById("tips").innerHTML=word;
     }
 </script>

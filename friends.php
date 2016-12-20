@@ -1,4 +1,5 @@
 <?php
+    session_start();
     echo "load friends!<br>";
     $name = $_SESSION['user'];
     //echo $name;
@@ -27,7 +28,7 @@
         {
             $talk_to = $childv2;
         }
-        $_SESSION['to_who'] = $talk_to;
+        //$_SESSION['to_who'] = $talk_to;
         echo "<a href=?str_to=$talk_to>";
         echo " ".$talk_to;
         echo "</a>";
