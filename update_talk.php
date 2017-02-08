@@ -17,7 +17,8 @@
     {
         die('Could not select test database: '.mysql_error());
     }
-    mysql_query("set names 'gbk'");
+    // mysql_query("set names 'gbk'");
+    mysql_query("set character set 'utf8'");
     if(!date_default_timezone_set("Asia/Hong_Kong")) {
         die('set time failed!');
     }
@@ -33,16 +34,20 @@
     
     $result = mysql_query("select * from talk where from_who='$from_who' and to_who='$to_who' order by talk_date desc limit 8",$up_handle);    // search
     $query_2 = mysql_query("select * from talk where from_who='$to_who' and to_who='$from_who' order by talk_date desc limit 8",$up_handle);
-    $wordArray = "$from_who>>>$to_who";
+    //$wordArray = "$from_who>>>$to_who";
+    $wordArray = "{";
     while($row = mysql_fetch_array($result)) {
         // echo "<p>" . "say:" . $row['word'] . "</p>";
-        $wordArray = $wordArray . '[word:'.$row['word']."\x03 date:".$row['talk_date']."]<br>";
+        $wordArray = $wordArray . '[word:'.$row['word']."\x03date:".$row['talk_date']."]<br>";
     }
-    $wordArray2 = "$to_who>$from_who";
+    $wordArray = $wordArray . "}";
+    // $wordArray2 = "$to_who>$from_who";
+    $wordArray2 = "{";
     while($row = mysql_fetch_array($query_2)) {
         // echo "<p>" . "say:" . $row['word'] . "</p>";
-        $wordArray2 = $wordArray2 . '[word:'.$row['word']."\x03 date:".$row['talk_date']."]<br>";
+        $wordArray2 = $wordArray2 . '[word:'.$row['word']."\x03date:".$row['talk_date']."]<br>";
     }
+    $wordArray2 = $wordArray2 . "}";
     $response = $wordArray . $wordArray2;
     mysql_close($up_handle);
     echo $response.$getword;
